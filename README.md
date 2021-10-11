@@ -1,5 +1,5 @@
 # CryotoCurrencyExchange
-SpringBoot Rest API calling aoi's from Deribit Exchnage
+SpringBoot Rest API calling api's from Deribit Exchnage
 
 
 Copper Deribit Interview Demo
