@@ -1,7 +1,8 @@
 # CryotoCurrencyExchange
 SpringBoot Rest API calling api's from Deribit Exchnage
 
-To run use: mvn spring-boot:run
+**To run use**: mvn spring-boot:run
+**to view API through Swagger**: http://localhost:8083/swagger-ui/#/crypto-controller
 
 Copper Deribit Interview Demo
 A SpringBoot application to integrate into the Derbit test exchange over REST. 
