@@ -1,6 +1,7 @@
 # CryotoCurrencyExchange
 SpringBoot Rest API calling api's from Deribit Exchnage
 
+To run use: mvn spring-boot:run
 
 Copper Deribit Interview Demo
 A SpringBoot application to integrate into the Derbit test exchange over REST. 
