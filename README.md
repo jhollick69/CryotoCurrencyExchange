@@ -1,7 +1,23 @@
 # CryotoCurrencyExchange
 SpringBoot Rest API calling api's from Deribit Exchnage
 
-**To run use**: mvn spring-boot:run
+
+**To Build :**
+maven package
+
+Or
+
+mvn install / mvn clean install
+
+
+**To run use**:
+mvn spring-boot:run
+
+Or
+
+java -jar target/Crypto-Exchange-demo-0.0.1-SNAPSHOT.jar
+
+
 **to view API through Swagger**: http://localhost:8083/swagger-ui/#/crypto-controller
 
 Copper Deribit Interview Demo
