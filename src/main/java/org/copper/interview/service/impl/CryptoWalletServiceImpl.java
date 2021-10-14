@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.copper.interview.controller.HttpUtils;
-import org.copper.interview.model.AccountDepositResponse;
-import org.copper.interview.model.Deposits;
-import org.copper.interview.model.TransferToSubAccount;
-import org.copper.interview.model.TransferToExternalAccount;
-import org.copper.interview.model.Withdrawal;
-import org.copper.interview.model.WithdrawalResponse;
+import org.copper.interview.model.AssetResponse;
+import org.copper.interview.model.ConfirmationResult;
+import org.copper.interview.model.Data;
+import org.copper.interview.model.TransferExternalAccountResult;
+import org.copper.interview.model.TransferSubAccountResult;
 import org.copper.interview.test.constants.URLConstants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -22,20 +21,20 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class CryptoWalletServiceImpl implements CryptoWalletService {
 
-	
 	@Override
-	public List<Withdrawal> getWithDrawalsHistory(String clientId, String clientsecret,  String currency,
-			Integer count,Integer offset) throws IOException {
-		List<Withdrawal> listData = new ArrayList<Withdrawal>();
+	public List<Data> getWithDrawalsHistory(String clientId, String clientsecret, String currency, Integer count,
+			Integer offset) throws IOException {
+		List<Data> listData = new ArrayList<Data>();
 
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
-			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/get_withdrawals?count=+" + count
+			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/get_withdrawals?count=" + count
 					+ "&currency=" + currency + "&offset=" + offset;
-			ResponseEntity<WithdrawalResponse> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
-					WithdrawalResponse.class);
-			listData = responseEntity.getBody().result;
+			ResponseEntity<AssetResponse> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
+					AssetResponse.class);
+
+			listData = responseEntity.getBody().getResult().getData();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -45,18 +44,18 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 	}
 
 	@Override
-	public List<Deposits> getDepositsHistory(String clientId, String clientsecret, String currency, Integer count,
+	public List<Data> getDepositsHistory(String clientId, String clientsecret, String currency, Integer count,
 			Integer offset) throws IOException {
-		List<Deposits> listData = new ArrayList<Deposits>();
-		ResponseEntity<AccountDepositResponse> responseEntity = null;
+		List<Data> listData = new ArrayList<Data>();
+		ResponseEntity<AssetResponse> responseEntity = null;
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
 			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/get_deposits?" + "currency=" + currency
 					+ "&count=" + count + "&offset" + offset;
-			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, AccountDepositResponse.class);
+			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, AssetResponse.class);
 
-			listData = responseEntity.getBody().result;
+			listData = responseEntity.getBody().getResult().getData();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -65,33 +64,34 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 	}
 
 	@Override
-	public TransferToSubAccount transferToSubAccount(String clientId, String clientsecret, String currency,
+	public TransferSubAccountResult transferToSubAccount(String clientId, String clientsecret, String currency,
 			BigDecimal amount, Integer destination) throws IOException {
-		ResponseEntity<TransferToSubAccount> responseEntity = null;
+		ResponseEntity<ConfirmationResult> responseEntity = null;
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
 			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_subaccount?amount="
 					+ amount + "&currency=" + currency + "&destination=" + destination;
-			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, TransferToSubAccount.class);
+			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, ConfirmationResult.class);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return responseEntity.getBody();
+		return responseEntity.getBody().getResult();
 	}
 
 	@Override
-	public TransferToExternalAccount transferToExternalAccounts(String clientId, String clientsecret, String currency,
-			BigDecimal amount, Integer destination) throws IOException {
-		ResponseEntity<TransferToExternalAccount> responseEntity = null;
+	public TransferExternalAccountResult transferToExternalAccounts(String clientId, String clientsecret,
+			String currency, BigDecimal amount, Integer destination) throws IOException {
+		ResponseEntity<TransferExternalAccountResult> responseEntity = null;
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
-			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_subaccount?amount="
-					+ amount + "&currency=" + currency + "destination=" + destination;
-			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, TransferToExternalAccount.class);
-
+			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_user?amount=" + amount
+					+ "&currency=" + currency + "destination=" + destination;
+			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
+					TransferExternalAccountResult.class);
+			System.out.println("h");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

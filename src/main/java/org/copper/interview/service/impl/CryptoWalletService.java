@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.copper.interview.model.Deposits;
-import org.copper.interview.model.TransferToSubAccount;
-import org.copper.interview.model.TransferToExternalAccount;
-import org.copper.interview.model.Withdrawal;
+import org.copper.interview.model.Data;
+import org.copper.interview.model.TransferExternalAccountResult;
+import org.copper.interview.model.TransferSubAccountResult;
 
 
 
@@ -15,19 +14,19 @@ public interface CryptoWalletService {
 	/*
 	 * Getting history of withdrawals and deposits.
 	 */
-	List<Withdrawal> getWithDrawalsHistory(String clientId, String clientsecret,String currency,Integer count,Integer offset) throws IOException;
-	List<Deposits>  getDepositsHistory(String clientId, String clientsecret,String currency, Integer count, Integer offset) throws IOException;
+	List<Data> getWithDrawalsHistory(String clientId, String clientsecret,String currency,Integer count,Integer offset) throws IOException;
+	List<Data>  getDepositsHistory(String clientId, String clientsecret,String currency, Integer count, Integer offset) throws IOException;
 
 	/*
 	 * Withdraw from exchange to external  address.
 	 */
-	TransferToSubAccount transferToSubAccount(String clientId, String clientsecret,String currency,
+	TransferSubAccountResult transferToSubAccount(String clientId, String clientsecret,String currency,
 		      BigDecimal amount, Integer subAccountID) throws IOException;
 
 	/*
 	 *  Transfer between main account and sub account.
 	 */
-	TransferToExternalAccount transferToExternalAccounts(String clientId, String clientsecret,
+	TransferExternalAccountResult transferToExternalAccounts(String clientId, String clientsecret,
 			String currency, BigDecimal amount, Integer destination) throws IOException;
 	
 	

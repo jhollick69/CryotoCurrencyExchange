@@ -1,13 +1,11 @@
 package org.copper.interview.model;
 
-import java.util.List;
-public class AccountResponse
-{
-	    private String jsonrpc;
+public class TransferExternalResult {
+	   private String jsonrpc;
 
 	    private int id;
 
-	    private List<Result> result;
+	    private TransferExternalAccountResult result;
 
 	    public void setJsonrpc(String jsonrpc){
 	        this.jsonrpc = jsonrpc;
@@ -21,13 +19,10 @@ public class AccountResponse
 	    public int getId(){
 	        return this.id;
 	    }
-	    public void setResult(List<Result> result){
+	    public void setResult(TransferExternalAccountResult result){
 	        this.result = result;
 	    }
-	    public List<Result> getResult(){
+	    public TransferExternalAccountResult getResult(){
 	        return this.result;
 	    }
-	}
-	    
-	
-
+}

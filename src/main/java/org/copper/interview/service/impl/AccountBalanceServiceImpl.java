@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import org.copper.interview.controller.HttpUtils;
 import org.copper.interview.model.AccountResponse;
@@ -39,8 +40,9 @@ public class AccountBalanceServiceImpl implements AccountBalanceService {
 
 	private List<Account> getSubAccounts(String clientId, String clientsecret, boolean withPortfolio)
 			throws IOException {
+		List<Account> listOfAccs = new ArrayList();
+		;
 
-		List<Account> listData = new ArrayList<Account>();
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
@@ -50,13 +52,15 @@ public class AccountBalanceServiceImpl implements AccountBalanceService {
 
 			ResponseEntity<AccountResponse> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
 					AccountResponse.class);
-			listData = responseEntity.getBody().result;
+
+			listOfAccs = responseEntity.getBody().getResult().stream().map(x -> x.getPortfolio().getAssest())
+					.collect(Collectors.toList());
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return listData;
 
+		return listOfAccs;
 	}
 
 }
