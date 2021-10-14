@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CryptoExchangeDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CryptoExchangeDemoApplication.class, args);
+		 SpringApplication.run(CryptoExchangeDemoApplication.class, args);
 	}
 
 }
