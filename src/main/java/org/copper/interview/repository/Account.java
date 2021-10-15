@@ -1,15 +1,13 @@
 package org.copper.interview.repository;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Account {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int accid;
+	
 	private double balance;
 
 	private String currency;
@@ -18,11 +16,9 @@ public class Account {
 
 	private double available_funds;
 	private double reservedFunds;
-
-	public Account() {
-		
-		
-	}
+	private String accountType;
+	private String username;
+	
 
 	public double getBalance() {
 		return balance;
@@ -42,12 +38,14 @@ public class Account {
 	}
 
 	
-	public int getId() {
-		return id;
+	
+
+	public int getAccid() {
+		return accid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setAccid(int accid) {
+		this.accid = accid;
 	}
 
 	public double getAvailable_withdrawal_funds() {
@@ -69,14 +67,31 @@ public class Account {
 	}
 
 	public double getReservedFunds() {
-		return getReservedFunds();
+		return reservedFunds;
 	}
 
 	public void setReservedFunds(double reservedFunds) {
 		this.reservedFunds = reservedFunds;
 	}
 
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	
+
 	
 
 }

@@ -1,9 +1,11 @@
 package org.copper.interview.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Result
 {
     private String email;
-
+   
     private int id;
 
     private boolean is_password;

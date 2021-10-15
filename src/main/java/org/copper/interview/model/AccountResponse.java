@@ -5,8 +5,7 @@ public class AccountResponse
 {
 	    private String jsonrpc;
 
-	    private int id;
-
+	    
 	    private List<Result> result;
 
 	    public void setJsonrpc(String jsonrpc){
@@ -15,12 +14,7 @@ public class AccountResponse
 	    public String getJsonrpc(){
 	        return this.jsonrpc;
 	    }
-	    public void setId(int id){
-	        this.id = id;
-	    }
-	    public int getId(){
-	        return this.id;
-	    }
+	   
 	    public void setResult(List<Result> result){
 	        this.result = result;
 	    }

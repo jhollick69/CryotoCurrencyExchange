@@ -2,15 +2,21 @@ package org.copper.interview.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import org.copper.interview.controller.HttpUtils;
 import org.copper.interview.model.AccountResponse;
+import org.copper.interview.model.Portfolio;
+import org.copper.interview.model.Result;
 import org.copper.interview.repository.Account;
 import org.copper.interview.repository.ClientBalanceRepository;
 import org.copper.interview.test.constants.URLConstants;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -40,8 +46,8 @@ public class AccountBalanceServiceImpl implements AccountBalanceService {
 
 	private List<Account> getSubAccounts(String clientId, String clientsecret, boolean withPortfolio)
 			throws IOException {
-		List<Account> listOfAccs = new ArrayList();
-		;
+		List<Account> listOfAccs = new ArrayList<Account>();
+		List<Result> res = new ArrayList<Result>();
 
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
@@ -53,8 +59,15 @@ public class AccountBalanceServiceImpl implements AccountBalanceService {
 			ResponseEntity<AccountResponse> responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
 					AccountResponse.class);
 
-			listOfAccs = responseEntity.getBody().getResult().stream().map(x -> x.getPortfolio().getAssest())
-					.collect(Collectors.toList());
+			res = responseEntity.getBody().getResult();
+			res.stream().forEach(x -> {
+				x.getPortfolio().getAssest().setAccid(x.getId());
+				x.getPortfolio().getAssest().setAccountType(x.getType());
+				x.getPortfolio().getAssest().setUsername(x.getUsername());
+
+			});
+
+			listOfAccs = res.stream().map(x -> x.getPortfolio().getAssest()).collect(Collectors.toList());
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
