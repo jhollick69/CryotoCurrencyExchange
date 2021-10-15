@@ -16,10 +16,10 @@ public class SecurityServiceImpl implements SecurityService {
 		try {
 			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "public/auth?client_id=" + clientId
 					+ "&client_secret=" + client_secret + "&grant_type=client_credentials";
-			// make a request
+
 			ResponseEntity<AuthResponse> response = new RestTemplate().exchange(url, HttpMethod.GET, null,
 					AuthResponse.class);
-			// get JSON response
+
 			json = response.getBody().result.access_token;
 
 		} catch (Exception ex) {

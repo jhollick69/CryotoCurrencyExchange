@@ -2,21 +2,16 @@ package org.copper.interview.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import org.copper.interview.controller.HttpUtils;
 import org.copper.interview.model.AccountResponse;
-import org.copper.interview.model.Portfolio;
 import org.copper.interview.model.Result;
 import org.copper.interview.repository.Account;
 import org.copper.interview.repository.ClientBalanceRepository;
 import org.copper.interview.test.constants.URLConstants;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -39,9 +34,9 @@ public class AccountBalanceServiceImpl implements AccountBalanceService {
 	}
 
 	private void saveBalances(List<Account> accountBalance) {
-		for (Account balance : accountBalance) {
-			clientBalanceRepository.save(balance);
-		}
+		accountBalance.stream().forEach(x-> {		
+                clientBalanceRepository.save(x);
+        });
 	}
 
 	private List<Account> getSubAccounts(String clientId, String clientsecret, boolean withPortfolio)

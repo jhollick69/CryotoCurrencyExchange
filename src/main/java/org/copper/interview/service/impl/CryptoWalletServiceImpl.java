@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.copper.interview.controller.HttpUtils;
 import org.copper.interview.model.AssetResponse;
@@ -96,6 +97,17 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 			ex.printStackTrace();
 		}
 		return responseEntity.getBody();
+	}
+
+	@Override
+	public List<Data> getWihdrawalAndDepositsHistory(String clientId, String clientsecret, String currency,
+			Integer count, Integer offset) throws IOException {
+
+		List<Data> collatedList = new ArrayList<>();
+		Stream.of(getDepositsHistory(clientId, clientsecret, currency, count, offset),
+				getWithDrawalsHistory(clientId, clientsecret, currency, count, offset)).forEach(collatedList::addAll);
+
+		return collatedList;
 	}
 
 }

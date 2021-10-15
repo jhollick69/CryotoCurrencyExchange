@@ -12,11 +12,11 @@ import org.copper.interview.model.TransferSubAccountResult;
 
 public interface CryptoWalletService {
 	/*
-	 * Getting history of withdrawals and deposits.
+	 * Getting history of withdrawals and deposits and both.
 	 */
 	List<Data> getWithDrawalsHistory(String clientId, String clientsecret,String currency,Integer count,Integer offset) throws IOException;
 	List<Data>  getDepositsHistory(String clientId, String clientsecret,String currency, Integer count, Integer offset) throws IOException;
-
+	List<Data>  getWihdrawalAndDepositsHistory(String clientId, String clientsecret,String currency, Integer count, Integer offset) throws IOException;
 	/*
 	 * Withdraw from exchange to external  address.
 	 */
