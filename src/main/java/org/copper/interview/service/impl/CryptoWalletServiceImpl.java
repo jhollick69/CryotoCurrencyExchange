@@ -89,10 +89,10 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
 			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_user?amount=" + amount
-					+ "&currency=" + currency + "destination=" + destination;
+					+ "&currency=" + currency + "&destination=" + destination;
 			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity,
 					TransferExternalAccountResult.class);
-			System.out.println("h");
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

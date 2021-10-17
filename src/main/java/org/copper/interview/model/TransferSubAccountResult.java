@@ -2,7 +2,7 @@ package org.copper.interview.model;
 
 public class TransferSubAccountResult {
 
-	private int updated_timestamp;
+	private String updated_timestamp;
 
 	private String type;
 
@@ -16,15 +16,15 @@ public class TransferSubAccountResult {
 
 	private String currency;
 
-	private int created_timestamp;
+	private String created_timestamp;
 
 	private double amount;
 
-	public void setUpdated_timestamp(int updated_timestamp) {
+	public void setUpdated_timestamp(String updated_timestamp) {
 		this.updated_timestamp = updated_timestamp;
 	}
 
-	public int getUpdated_timestamp() {
+	public String getUpdated_timestamp() {
 		return this.updated_timestamp;
 	}
 
@@ -76,11 +76,11 @@ public class TransferSubAccountResult {
 		return this.currency;
 	}
 
-	public void setCreated_timestamp(int created_timestamp) {
+	public void setCreated_timestamp(String created_timestamp) {
 		this.created_timestamp = created_timestamp;
 	}
 
-	public int getCreated_timestamp() {
+	public String getCreated_timestamp() {
 		return this.created_timestamp;
 	}
 

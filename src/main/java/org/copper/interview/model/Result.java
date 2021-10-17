@@ -1,7 +1,5 @@
 package org.copper.interview.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Result {
 	private String email;
 
