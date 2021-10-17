@@ -1,5 +1,9 @@
-# CryotoCurrencyExchange
-SpringBoot Rest API calling api's from Deribit Exchnage
+# CryptoCurrencyExchange
+SpringBoot Rest API calling api's from Deribit Exchange
+TODO: a) Junits/integration to do
+	  b) common code collated and refactored
+	  c) better credential handling , could put in application.properties rather than each call
+	  
 
 
 **To Build :**
@@ -30,7 +34,7 @@ A SpringBoot application to integrate into the Derbit test exchange over REST.
 
 Services are:
 
-1) Account Balance API
+1) ***Account Balance API***
 This returns the details for each account including balances
 
 Example curl:
@@ -40,23 +44,35 @@ curl -X GET "http://localhost:8083/api/v1/account/balances?clientSecret=7h-87QJd
 
 Getting the user's current balances and reserved funds for all available currencies (‘reserved’ means are not available for withdrawal).
 
-2) Account Deposit History
+2) ***Account Deposit History***
 This returns the deposit history for a currency.
 
 Example curl:
 
 curl -X GET "http://localhost:8083/api/v1/deposit/history?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIqI&clientID=UoSQ1r2d&currency=BTC&count=10&offset=1" -H "accept: */*"
 
+3) ***Both withdrawal and deposit history for a currency***
 
-3) Account Withdrawal History
+Example curl:
+
+curl -X GET "http://localhost:8083/api/v1/assets/history?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIqI&clientID=UoSQ1r2d&currency=btc&count=3&offset=0" -H "accept: */*"
+
+4) ***Account Withdrawal History***
 This returns the withdrawal history for a currency
 
 Example curl:
 
-curl -X GET "http://localhost:8083/api/v1/withdrawal/history?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIq&clientID=oSQ1r2d&currency=BTC&count=0&offset=0" -H "accept: */*"
+curl -X GET "http://localhost:8083/api/v1/withdrawal/history?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIqI&clientID=UoSQ1r2d&currency=btc&count=5&offset=0" -H "accept: */*"
 
-4) Transfer from main account to sub account
+5) ***Transfer from main account to sub account***
 This will transfer assets to its sub account
-c
-5) Transfer to an external account
+
+Example curl:
+
+curl -X GET "http://localhost:8083/api/v1/transfer/subaccount?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIqI&clientID=UoSQ1r2d&currency=btc&amount=1&destination=34098" -H "accept: */*"
+
+6) ***Transfer to an external account***
+
 This transfers asset to an  external accounts
+curl -X GET "http://localhost:8083/api/v1/transfer/external?clientSecret=7h-87QJdS67dJV1J6MRoibPKomseuB-qb3_FQ8gMIqI&clientID=UoSQ1r2d&currency=btc&amount=1&destination=3LmiRtpFsQYMBZ5gswrUqqvYXVn5oZCwG9" -H "accept: */*"
+
