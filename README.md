@@ -15,8 +15,9 @@ mvn spring-boot:run
 java -jar target/Crypto-Exchange-demo-0.0.1-SNAPSHOT.jar
 
 Or
+
 **To Run in Docker**
-A local Postgress intance running on port 5432 or in a docker container with the folloeing command 
+A local Postgress intance running on port 5432 or in a docker container with the following command 
 docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=test -d postgres
 
 docker-compose up
