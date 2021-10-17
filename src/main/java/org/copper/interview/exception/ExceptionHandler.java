@@ -24,5 +24,8 @@ public class ExceptionHandler {
 
 		return new ResponseEntity<ErrorMessage>(message, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
+	
 
 }

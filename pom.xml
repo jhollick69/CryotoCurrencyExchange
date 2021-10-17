@@ -9,8 +9,8 @@
 		<version>2.5.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.copper.crypto.JH</groupId>
-	<artifactId>Crypto-Exchange-demo</artifactId>
+	<groupId>org.copper.interview</groupId>
+	<artifactId>cryptoexchangedemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Crypto-Exchange-demo</name>
 	<description>Crypto Exchange demo</description>
@@ -78,6 +78,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>org.copper.interview.CryptoExchangeDemoApplication</mainClass>
+					<finalName>exchangecopperservice</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

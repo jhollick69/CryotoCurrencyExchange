@@ -27,7 +27,7 @@ public interface CryptoWalletService {
 	 *  Transfer between main account and sub account.
 	 */
 	TransferExternalAccountResult transferToExternalAccounts(String clientId, String clientsecret,
-			String currency, BigDecimal amount, Integer destination) throws IOException;
+			String currency, BigDecimal amount, String destination) throws IOException;
 	
 	
 	

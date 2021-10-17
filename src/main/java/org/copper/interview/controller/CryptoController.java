@@ -109,7 +109,7 @@ public class CryptoController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<TransferExternalAccountResult> transferBetweenAccounts(@RequestParam String clientSecret,
 			@RequestParam String clientID, @RequestParam String currency, @RequestParam BigDecimal amount,
-			@RequestParam Integer destination) throws IOException {
+			@RequestParam String destination) throws IOException {
 		TransferExternalAccountResult transferToRemoteAccount = cryptoWalletServiceImpl
 				.transferToExternalAccounts(clientID, clientSecret, currency, amount, destination);
 		logger.info("Entered /transfer/external Api endpoint");

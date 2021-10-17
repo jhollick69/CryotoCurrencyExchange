@@ -71,8 +71,8 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
 					HttpUtils.createHttpHeaders(clientId, clientsecret));
-			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_subaccount?amount="
-					+ amount + "&currency=" + currency + "&destination=" + destination;
+			String url = URLConstants.DERIBIT_TEST_API_BASE_URL + "private/submit_transfer_to_subaccount?currency="
+					+ currency + "&amount=" + amount + "&destination=" + destination;
 			responseEntity = new RestTemplate().exchange(url, HttpMethod.GET, entity, ConfirmationResult.class);
 
 		} catch (Exception ex) {
@@ -83,7 +83,7 @@ public class CryptoWalletServiceImpl implements CryptoWalletService {
 
 	@Override
 	public TransferExternalAccountResult transferToExternalAccounts(String clientId, String clientsecret,
-			String currency, BigDecimal amount, Integer destination) throws IOException {
+			String currency, BigDecimal amount, String destination) throws IOException {
 		ResponseEntity<TransferExternalAccountResult> responseEntity = null;
 		try {
 			final HttpEntity<String> entity = new HttpEntity<String>(
